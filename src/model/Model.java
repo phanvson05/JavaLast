@@ -36,26 +36,26 @@ public class Model {
             lines = stream.collect(Collectors.toList());
         }
     }
- // Đệ quy duyệt thư mục - sẽ trả về danh sách các file trong thư mục
+ 
     public List<Path> listFiles(Path path) throws IOException {
         List<Path> fileList = new ArrayList<>();
         
-        // Kiểm tra xem path có tồn tại không
+      
         if (!Files.exists(path)) {
             throw new IllegalArgumentException("Path does not exist: " + path);
         }
         
-        // Kiểm tra xem path có phải là thư mục không
+      
         if (!Files.isDirectory(path)) {
             throw new IllegalArgumentException("Path is not a directory: " + path);
         }
         
-        // Sử dụng try-with-resources để mở luồng và đảm bảo đóng tự động
+        
         try (Stream<Path> walk = Files.list(path)) {
             fileList = walk
-                // Lọc ra các tệp thông thường
+             
                 .filter(Files::isRegularFile)
-                // Thu thập các tệp vào danh sách
+               
                 .collect(Collectors.toList());
         }
         
